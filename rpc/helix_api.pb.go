@@ -441,6 +441,115 @@ func (x *Streams) GetStreams() []*Stream {
 	return nil
 }
 
+type StatusParams struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *StatusParams) Reset() {
+	*x = StatusParams{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_helix_api_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StatusParams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StatusParams) ProtoMessage() {}
+
+func (x *StatusParams) ProtoReflect() protoreflect.Message {
+	mi := &file_helix_api_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StatusParams.ProtoReflect.Descriptor instead.
+func (*StatusParams) Descriptor() ([]byte, []int) {
+	return file_helix_api_proto_rawDescGZIP(), []int{7}
+}
+
+type Status struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Alloc     uint64 `protobuf:"varint,1,opt,name=Alloc,proto3" json:"Alloc,omitempty"`
+	Sys       uint64 `protobuf:"varint,2,opt,name=Sys,proto3" json:"Sys,omitempty"`
+	NumGC     uint32 `protobuf:"varint,3,opt,name=NumGC,proto3" json:"NumGC,omitempty"`
+	CacheSize uint32 `protobuf:"varint,4,opt,name=CacheSize,proto3" json:"CacheSize,omitempty"`
+}
+
+func (x *Status) Reset() {
+	*x = Status{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_helix_api_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Status) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Status) ProtoMessage() {}
+
+func (x *Status) ProtoReflect() protoreflect.Message {
+	mi := &file_helix_api_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Status.ProtoReflect.Descriptor instead.
+func (*Status) Descriptor() ([]byte, []int) {
+	return file_helix_api_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *Status) GetAlloc() uint64 {
+	if x != nil {
+		return x.Alloc
+	}
+	return 0
+}
+
+func (x *Status) GetSys() uint64 {
+	if x != nil {
+		return x.Sys
+	}
+	return 0
+}
+
+func (x *Status) GetNumGC() uint32 {
+	if x != nil {
+		return x.NumGC
+	}
+	return 0
+}
+
+func (x *Status) GetCacheSize() uint32 {
+	if x != nil {
+		return x.CacheSize
+	}
+	return 0
+}
+
 var File_helix_api_proto protoreflect.FileDescriptor
 
 var file_helix_api_proto_rawDesc = []byte{
@@ -479,19 +588,29 @@ var file_helix_api_proto_rawDesc = []byte{
 	0x6d, 0x65, 0x73, 0x22, 0x30, 0x0a, 0x07, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x12, 0x25,
 	0x0a, 0x07, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32,
 	0x0b, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x52, 0x07, 0x53, 0x74,
-	0x72, 0x65, 0x61, 0x6d, 0x73, 0x32, 0x8c, 0x01, 0x0a, 0x0b, 0x54, 0x77, 0x69, 0x74, 0x63, 0x68,
-	0x43, 0x61, 0x63, 0x68, 0x65, 0x12, 0x27, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72,
-	0x73, 0x12, 0x0f, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x51, 0x75, 0x65,
-	0x72, 0x79, 0x1a, 0x0a, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x27,
-	0x0a, 0x08, 0x47, 0x65, 0x74, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x12, 0x0f, 0x2e, 0x72, 0x70, 0x63,
-	0x2e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a, 0x0a, 0x2e, 0x72, 0x70,
-	0x63, 0x2e, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x12, 0x2b, 0x0a, 0x0a, 0x47, 0x65, 0x74, 0x53, 0x74,
-	0x72, 0x65, 0x61, 0x6d, 0x73, 0x12, 0x0f, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x4d, 0x75, 0x6c, 0x74,
-	0x69, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a, 0x0c, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x53, 0x74, 0x72,
-	0x65, 0x61, 0x6d, 0x73, 0x42, 0x2a, 0x5a, 0x28, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x64, 0x6e, 0x73, 0x67, 0x65, 0x2f, 0x67, 0x6f, 0x2d, 0x74, 0x77, 0x69, 0x74,
-	0x63, 0x68, 0x2d, 0x63, 0x61, 0x63, 0x68, 0x65, 0x2f, 0x72, 0x70, 0x63, 0x3b, 0x72, 0x70, 0x63,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x65, 0x61, 0x6d, 0x73, 0x22, 0x0e, 0x0a, 0x0c, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x50,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x22, 0x64, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12,
+	0x14, 0x0a, 0x05, 0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x05,
+	0x41, 0x6c, 0x6c, 0x6f, 0x63, 0x12, 0x10, 0x0a, 0x03, 0x53, 0x79, 0x73, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x04, 0x52, 0x03, 0x53, 0x79, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x4e, 0x75, 0x6d, 0x47, 0x43,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x4e, 0x75, 0x6d, 0x47, 0x43, 0x12, 0x1c, 0x0a,
+	0x09, 0x43, 0x61, 0x63, 0x68, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d,
+	0x52, 0x09, 0x43, 0x61, 0x63, 0x68, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x32, 0xb9, 0x01, 0x0a, 0x0b,
+	0x54, 0x77, 0x69, 0x74, 0x63, 0x68, 0x43, 0x61, 0x63, 0x68, 0x65, 0x12, 0x27, 0x0a, 0x08, 0x47,
+	0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x0f, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x4d, 0x75,
+	0x6c, 0x74, 0x69, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a, 0x0a, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x55,
+	0x73, 0x65, 0x72, 0x73, 0x12, 0x27, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x47, 0x61, 0x6d, 0x65, 0x73,
+	0x12, 0x0f, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x51, 0x75, 0x65, 0x72,
+	0x79, 0x1a, 0x0a, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x12, 0x2b, 0x0a,
+	0x0a, 0x47, 0x65, 0x74, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x12, 0x0f, 0x2e, 0x72, 0x70,
+	0x63, 0x2e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a, 0x0c, 0x2e, 0x72,
+	0x70, 0x63, 0x2e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x12, 0x2b, 0x0a, 0x09, 0x47, 0x65,
+	0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x11, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x53, 0x74,
+	0x61, 0x74, 0x75, 0x73, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x0b, 0x2e, 0x72, 0x70, 0x63,
+	0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x42, 0x29, 0x5a, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75,
+	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x6e, 0x73, 0x67, 0x65, 0x2f, 0x67, 0x6f, 0x2d, 0x63,
+	0x61, 0x63, 0x68, 0x65, 0x2d, 0x63, 0x61, 0x63, 0x68, 0x65, 0x2f, 0x72, 0x70, 0x63, 0x3b, 0x72,
+	0x70, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -506,15 +625,17 @@ func file_helix_api_proto_rawDescGZIP() []byte {
 	return file_helix_api_proto_rawDescData
 }
 
-var file_helix_api_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_helix_api_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_helix_api_proto_goTypes = []interface{}{
-	(*User)(nil),       // 0: rpc.User
-	(*Game)(nil),       // 1: rpc.Game
-	(*Stream)(nil),     // 2: rpc.Stream
-	(*MultiQuery)(nil), // 3: rpc.MultiQuery
-	(*Users)(nil),      // 4: rpc.Users
-	(*Games)(nil),      // 5: rpc.Games
-	(*Streams)(nil),    // 6: rpc.Streams
+	(*User)(nil),         // 0: rpc.User
+	(*Game)(nil),         // 1: rpc.Game
+	(*Stream)(nil),       // 2: rpc.Stream
+	(*MultiQuery)(nil),   // 3: rpc.MultiQuery
+	(*Users)(nil),        // 4: rpc.Users
+	(*Games)(nil),        // 5: rpc.Games
+	(*Streams)(nil),      // 6: rpc.Streams
+	(*StatusParams)(nil), // 7: rpc.StatusParams
+	(*Status)(nil),       // 8: rpc.Status
 }
 var file_helix_api_proto_depIdxs = []int32{
 	0, // 0: rpc.Users.Users:type_name -> rpc.User
@@ -523,11 +644,13 @@ var file_helix_api_proto_depIdxs = []int32{
 	3, // 3: rpc.TwitchCache.GetUsers:input_type -> rpc.MultiQuery
 	3, // 4: rpc.TwitchCache.GetGames:input_type -> rpc.MultiQuery
 	3, // 5: rpc.TwitchCache.GetStreams:input_type -> rpc.MultiQuery
-	4, // 6: rpc.TwitchCache.GetUsers:output_type -> rpc.Users
-	5, // 7: rpc.TwitchCache.GetGames:output_type -> rpc.Games
-	6, // 8: rpc.TwitchCache.GetStreams:output_type -> rpc.Streams
-	6, // [6:9] is the sub-list for method output_type
-	3, // [3:6] is the sub-list for method input_type
+	7, // 6: rpc.TwitchCache.GetStatus:input_type -> rpc.StatusParams
+	4, // 7: rpc.TwitchCache.GetUsers:output_type -> rpc.Users
+	5, // 8: rpc.TwitchCache.GetGames:output_type -> rpc.Games
+	6, // 9: rpc.TwitchCache.GetStreams:output_type -> rpc.Streams
+	8, // 10: rpc.TwitchCache.GetStatus:output_type -> rpc.Status
+	7, // [7:11] is the sub-list for method output_type
+	3, // [3:7] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
 	3, // [3:3] is the sub-list for extension extendee
 	0, // [0:3] is the sub-list for field type_name
@@ -623,6 +746,30 @@ func file_helix_api_proto_init() {
 				return nil
 			}
 		}
+		file_helix_api_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StatusParams); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_helix_api_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Status); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -630,7 +777,7 @@ func file_helix_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_helix_api_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -659,6 +806,7 @@ type TwitchCacheClient interface {
 	GetUsers(ctx context.Context, in *MultiQuery, opts ...grpc.CallOption) (*Users, error)
 	GetGames(ctx context.Context, in *MultiQuery, opts ...grpc.CallOption) (*Games, error)
 	GetStreams(ctx context.Context, in *MultiQuery, opts ...grpc.CallOption) (*Streams, error)
+	GetStatus(ctx context.Context, in *StatusParams, opts ...grpc.CallOption) (*Status, error)
 }
 
 type twitchCacheClient struct {
@@ -696,11 +844,21 @@ func (c *twitchCacheClient) GetStreams(ctx context.Context, in *MultiQuery, opts
 	return out, nil
 }
 
+func (c *twitchCacheClient) GetStatus(ctx context.Context, in *StatusParams, opts ...grpc.CallOption) (*Status, error) {
+	out := new(Status)
+	err := c.cc.Invoke(ctx, "/rpc.TwitchCache/GetStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TwitchCacheServer is the server API for TwitchCache service.
 type TwitchCacheServer interface {
 	GetUsers(context.Context, *MultiQuery) (*Users, error)
 	GetGames(context.Context, *MultiQuery) (*Games, error)
 	GetStreams(context.Context, *MultiQuery) (*Streams, error)
+	GetStatus(context.Context, *StatusParams) (*Status, error)
 }
 
 // UnimplementedTwitchCacheServer can be embedded to have forward compatible implementations.
@@ -715,6 +873,9 @@ func (*UnimplementedTwitchCacheServer) GetGames(context.Context, *MultiQuery) (*
 }
 func (*UnimplementedTwitchCacheServer) GetStreams(context.Context, *MultiQuery) (*Streams, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetStreams not implemented")
+}
+func (*UnimplementedTwitchCacheServer) GetStatus(context.Context, *StatusParams) (*Status, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetStatus not implemented")
 }
 
 func RegisterTwitchCacheServer(s *grpc.Server, srv TwitchCacheServer) {
@@ -775,6 +936,24 @@ func _TwitchCache_GetStreams_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _TwitchCache_GetStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StatusParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TwitchCacheServer).GetStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rpc.TwitchCache/GetStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TwitchCacheServer).GetStatus(ctx, req.(*StatusParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _TwitchCache_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "rpc.TwitchCache",
 	HandlerType: (*TwitchCacheServer)(nil),
@@ -790,6 +969,10 @@ var _TwitchCache_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetStreams",
 			Handler:    _TwitchCache_GetStreams_Handler,
+		},
+		{
+			MethodName: "GetStatus",
+			Handler:    _TwitchCache_GetStatus_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

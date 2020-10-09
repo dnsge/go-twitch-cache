@@ -7,6 +7,7 @@ service TwitchCache {
   rpc GetUsers(MultiQuery) returns (Users);
   rpc GetGames(MultiQuery) returns (Games);
   rpc GetStreams(MultiQuery) returns (Streams);
+  rpc GetStatus(StatusParams) returns (Status);
 }
 
 message User {
@@ -46,4 +47,13 @@ message Games {
 
 message Streams {
   repeated Stream Streams = 1;
+}
+
+message StatusParams{}
+
+message Status {
+  uint64 Alloc = 1;
+  uint64 Sys = 2;
+  uint32 NumGC = 3;
+  uint32 CacheSize = 4;
 }

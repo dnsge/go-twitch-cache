@@ -8,6 +8,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"runtime"
 )
 
 type server struct {
@@ -70,7 +71,7 @@ func (s *server) GetUsers(_ context.Context, query *pb.MultiQuery) (*pb.Users, e
 
 func (s *server) GetGames(_ context.Context, query *pb.MultiQuery) (*pb.Games, error) {
 	result, err := s.client.GetGames(&helix.GamesParams{
-		IDs:    query.IDs,
+		IDs:   query.IDs,
 		Names: query.Names,
 	})
 
@@ -91,6 +92,17 @@ func (s *server) GetStreams(_ context.Context, query *pb.MultiQuery) (*pb.Stream
 	}
 
 	return mapHelixStreamsToPB(result), nil
+}
+
+func (s *server) GetStatus(context.Context, *pb.StatusParams) (*pb.Status, error) {
+	var m runtime.MemStats
+	runtime.ReadMemStats(&m)
+	return &pb.Status{
+		Alloc:     m.Alloc,
+		Sys:       m.Sys,
+		NumGC:     m.NumGC,
+		CacheSize: s.client.CacheSize(),
+	}, nil
 }
 
 func NewServer(options *cache.ClientOptions) *grpc.Server {

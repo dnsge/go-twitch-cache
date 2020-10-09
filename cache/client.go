@@ -59,6 +59,10 @@ func NewHelixCacheClient(options *ClientOptions) *HelixCacheClient {
 	}
 }
 
+func (c *HelixCacheClient) CacheSize() uint32 {
+	return uint32(c.cache.ItemCount())
+}
+
 func (c *HelixCacheClient) tokenIsValid() bool {
 	c.tokenMutex.RLock()
 	defer c.tokenMutex.RUnlock()
