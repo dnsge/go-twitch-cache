@@ -17,13 +17,9 @@ const (
 	gameNameKeyPrefix = "game:name:"
 )
 
-type Credentials struct {
-	ClientID     string
-	ClientSecret string
-}
-
 type ClientOptions struct {
-	Credentials     Credentials
+	ClientID        string
+	ClientSecret    string
 	Expiration      time.Duration
 	CleanupInterval time.Duration
 }
@@ -41,8 +37,8 @@ type HelixCacheClient struct {
 
 func NewHelixCacheClient(options *ClientOptions) *HelixCacheClient {
 	client, err := helix.NewClient(&helix.Options{
-		ClientID:     options.Credentials.ClientID,
-		ClientSecret: options.Credentials.ClientSecret,
+		ClientID:     options.ClientID,
+		ClientSecret: options.ClientSecret,
 		RedirectURI:  "",
 	})
 
@@ -96,6 +92,12 @@ func (c *HelixCacheClient) generateAppToken() error {
 	if err != nil {
 		return err
 	}
+
+	if token.StatusCode != http.StatusOK {
+		log.Printf("Failed to generate app token: %v", token.ErrorMessage)
+		return fmt.Errorf("failed to generate app token")
+	}
+
 	ttl := time.Duration(token.Data.ExpiresIn) * time.Second
 	c.setAppToken(token.Data.AccessToken, ttl)
 	return err

@@ -24,6 +24,116 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type UsersAndGamesParams struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserIDs []string `protobuf:"bytes,1,rep,name=UserIDs,proto3" json:"UserIDs,omitempty"`
+	GameIDs []string `protobuf:"bytes,2,rep,name=GameIDs,proto3" json:"GameIDs,omitempty"`
+}
+
+func (x *UsersAndGamesParams) Reset() {
+	*x = UsersAndGamesParams{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_helix_api_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UsersAndGamesParams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UsersAndGamesParams) ProtoMessage() {}
+
+func (x *UsersAndGamesParams) ProtoReflect() protoreflect.Message {
+	mi := &file_helix_api_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UsersAndGamesParams.ProtoReflect.Descriptor instead.
+func (*UsersAndGamesParams) Descriptor() ([]byte, []int) {
+	return file_helix_api_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *UsersAndGamesParams) GetUserIDs() []string {
+	if x != nil {
+		return x.UserIDs
+	}
+	return nil
+}
+
+func (x *UsersAndGamesParams) GetGameIDs() []string {
+	if x != nil {
+		return x.GameIDs
+	}
+	return nil
+}
+
+type UsersAndGames struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Users *Users `protobuf:"bytes,1,opt,name=Users,proto3" json:"Users,omitempty"`
+	Games *Games `protobuf:"bytes,2,opt,name=Games,proto3" json:"Games,omitempty"`
+}
+
+func (x *UsersAndGames) Reset() {
+	*x = UsersAndGames{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_helix_api_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UsersAndGames) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UsersAndGames) ProtoMessage() {}
+
+func (x *UsersAndGames) ProtoReflect() protoreflect.Message {
+	mi := &file_helix_api_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UsersAndGames.ProtoReflect.Descriptor instead.
+func (*UsersAndGames) Descriptor() ([]byte, []int) {
+	return file_helix_api_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *UsersAndGames) GetUsers() *Users {
+	if x != nil {
+		return x.Users
+	}
+	return nil
+}
+
+func (x *UsersAndGames) GetGames() *Games {
+	if x != nil {
+		return x.Games
+	}
+	return nil
+}
+
 type User struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -39,7 +149,7 @@ type User struct {
 func (x *User) Reset() {
 	*x = User{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_helix_api_proto_msgTypes[0]
+		mi := &file_helix_api_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -52,7 +162,7 @@ func (x *User) String() string {
 func (*User) ProtoMessage() {}
 
 func (x *User) ProtoReflect() protoreflect.Message {
-	mi := &file_helix_api_proto_msgTypes[0]
+	mi := &file_helix_api_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -65,7 +175,7 @@ func (x *User) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use User.ProtoReflect.Descriptor instead.
 func (*User) Descriptor() ([]byte, []int) {
-	return file_helix_api_proto_rawDescGZIP(), []int{0}
+	return file_helix_api_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *User) GetID() string {
@@ -116,7 +226,7 @@ type Game struct {
 func (x *Game) Reset() {
 	*x = Game{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_helix_api_proto_msgTypes[1]
+		mi := &file_helix_api_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -129,7 +239,7 @@ func (x *Game) String() string {
 func (*Game) ProtoMessage() {}
 
 func (x *Game) ProtoReflect() protoreflect.Message {
-	mi := &file_helix_api_proto_msgTypes[1]
+	mi := &file_helix_api_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -142,7 +252,7 @@ func (x *Game) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Game.ProtoReflect.Descriptor instead.
 func (*Game) Descriptor() ([]byte, []int) {
-	return file_helix_api_proto_rawDescGZIP(), []int{1}
+	return file_helix_api_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *Game) GetID() string {
@@ -181,7 +291,7 @@ type Stream struct {
 func (x *Stream) Reset() {
 	*x = Stream{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_helix_api_proto_msgTypes[2]
+		mi := &file_helix_api_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -194,7 +304,7 @@ func (x *Stream) String() string {
 func (*Stream) ProtoMessage() {}
 
 func (x *Stream) ProtoReflect() protoreflect.Message {
-	mi := &file_helix_api_proto_msgTypes[2]
+	mi := &file_helix_api_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -207,7 +317,7 @@ func (x *Stream) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Stream.ProtoReflect.Descriptor instead.
 func (*Stream) Descriptor() ([]byte, []int) {
-	return file_helix_api_proto_rawDescGZIP(), []int{2}
+	return file_helix_api_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *Stream) GetID() string {
@@ -257,7 +367,7 @@ type MultiQuery struct {
 func (x *MultiQuery) Reset() {
 	*x = MultiQuery{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_helix_api_proto_msgTypes[3]
+		mi := &file_helix_api_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -270,7 +380,7 @@ func (x *MultiQuery) String() string {
 func (*MultiQuery) ProtoMessage() {}
 
 func (x *MultiQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_helix_api_proto_msgTypes[3]
+	mi := &file_helix_api_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -283,7 +393,7 @@ func (x *MultiQuery) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MultiQuery.ProtoReflect.Descriptor instead.
 func (*MultiQuery) Descriptor() ([]byte, []int) {
-	return file_helix_api_proto_rawDescGZIP(), []int{3}
+	return file_helix_api_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *MultiQuery) GetIDs() []string {
@@ -311,7 +421,7 @@ type Users struct {
 func (x *Users) Reset() {
 	*x = Users{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_helix_api_proto_msgTypes[4]
+		mi := &file_helix_api_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -324,7 +434,7 @@ func (x *Users) String() string {
 func (*Users) ProtoMessage() {}
 
 func (x *Users) ProtoReflect() protoreflect.Message {
-	mi := &file_helix_api_proto_msgTypes[4]
+	mi := &file_helix_api_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -337,7 +447,7 @@ func (x *Users) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Users.ProtoReflect.Descriptor instead.
 func (*Users) Descriptor() ([]byte, []int) {
-	return file_helix_api_proto_rawDescGZIP(), []int{4}
+	return file_helix_api_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *Users) GetUsers() []*User {
@@ -358,7 +468,7 @@ type Games struct {
 func (x *Games) Reset() {
 	*x = Games{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_helix_api_proto_msgTypes[5]
+		mi := &file_helix_api_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -371,7 +481,7 @@ func (x *Games) String() string {
 func (*Games) ProtoMessage() {}
 
 func (x *Games) ProtoReflect() protoreflect.Message {
-	mi := &file_helix_api_proto_msgTypes[5]
+	mi := &file_helix_api_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -384,7 +494,7 @@ func (x *Games) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Games.ProtoReflect.Descriptor instead.
 func (*Games) Descriptor() ([]byte, []int) {
-	return file_helix_api_proto_rawDescGZIP(), []int{5}
+	return file_helix_api_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Games) GetGames() []*Game {
@@ -405,7 +515,7 @@ type Streams struct {
 func (x *Streams) Reset() {
 	*x = Streams{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_helix_api_proto_msgTypes[6]
+		mi := &file_helix_api_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -418,7 +528,7 @@ func (x *Streams) String() string {
 func (*Streams) ProtoMessage() {}
 
 func (x *Streams) ProtoReflect() protoreflect.Message {
-	mi := &file_helix_api_proto_msgTypes[6]
+	mi := &file_helix_api_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -431,7 +541,7 @@ func (x *Streams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Streams.ProtoReflect.Descriptor instead.
 func (*Streams) Descriptor() ([]byte, []int) {
-	return file_helix_api_proto_rawDescGZIP(), []int{6}
+	return file_helix_api_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *Streams) GetStreams() []*Stream {
@@ -450,7 +560,7 @@ type StatusParams struct {
 func (x *StatusParams) Reset() {
 	*x = StatusParams{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_helix_api_proto_msgTypes[7]
+		mi := &file_helix_api_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -463,7 +573,7 @@ func (x *StatusParams) String() string {
 func (*StatusParams) ProtoMessage() {}
 
 func (x *StatusParams) ProtoReflect() protoreflect.Message {
-	mi := &file_helix_api_proto_msgTypes[7]
+	mi := &file_helix_api_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -476,7 +586,7 @@ func (x *StatusParams) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use StatusParams.ProtoReflect.Descriptor instead.
 func (*StatusParams) Descriptor() ([]byte, []int) {
-	return file_helix_api_proto_rawDescGZIP(), []int{7}
+	return file_helix_api_proto_rawDescGZIP(), []int{9}
 }
 
 type Status struct {
@@ -493,7 +603,7 @@ type Status struct {
 func (x *Status) Reset() {
 	*x = Status{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_helix_api_proto_msgTypes[8]
+		mi := &file_helix_api_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -506,7 +616,7 @@ func (x *Status) String() string {
 func (*Status) ProtoMessage() {}
 
 func (x *Status) ProtoReflect() protoreflect.Message {
-	mi := &file_helix_api_proto_msgTypes[8]
+	mi := &file_helix_api_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -519,7 +629,7 @@ func (x *Status) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Status.ProtoReflect.Descriptor instead.
 func (*Status) Descriptor() ([]byte, []int) {
-	return file_helix_api_proto_rawDescGZIP(), []int{8}
+	return file_helix_api_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *Status) GetAlloc() uint64 {
@@ -554,7 +664,17 @@ var File_helix_api_proto protoreflect.FileDescriptor
 
 var file_helix_api_proto_rawDesc = []byte{
 	0x0a, 0x0f, 0x68, 0x65, 0x6c, 0x69, 0x78, 0x5f, 0x61, 0x70, 0x69, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x12, 0x03, 0x72, 0x70, 0x63, 0x22, 0x9a, 0x01, 0x0a, 0x04, 0x55, 0x73, 0x65, 0x72, 0x12,
+	0x6f, 0x12, 0x03, 0x72, 0x70, 0x63, 0x22, 0x49, 0x0a, 0x13, 0x55, 0x73, 0x65, 0x72, 0x73, 0x41,
+	0x6e, 0x64, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x18, 0x0a,
+	0x07, 0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x07,
+	0x55, 0x73, 0x65, 0x72, 0x49, 0x44, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x47, 0x61, 0x6d, 0x65, 0x49,
+	0x44, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x07, 0x47, 0x61, 0x6d, 0x65, 0x49, 0x44,
+	0x73, 0x22, 0x53, 0x0a, 0x0d, 0x55, 0x73, 0x65, 0x72, 0x73, 0x41, 0x6e, 0x64, 0x47, 0x61, 0x6d,
+	0x65, 0x73, 0x12, 0x20, 0x0a, 0x05, 0x55, 0x73, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x0a, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x73, 0x52, 0x05, 0x55,
+	0x73, 0x65, 0x72, 0x73, 0x12, 0x20, 0x0a, 0x05, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x52,
+	0x05, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x22, 0x9a, 0x01, 0x0a, 0x04, 0x55, 0x73, 0x65, 0x72, 0x12,
 	0x0e, 0x0a, 0x02, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x49, 0x44, 0x12,
 	0x14, 0x0a, 0x05, 0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05,
 	0x4c, 0x6f, 0x67, 0x69, 0x6e, 0x12, 0x20, 0x0a, 0x0b, 0x44, 0x69, 0x73, 0x70, 0x6c, 0x61, 0x79,
@@ -595,22 +715,26 @@ var file_helix_api_proto_rawDesc = []byte{
 	0x28, 0x04, 0x52, 0x03, 0x53, 0x79, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x4e, 0x75, 0x6d, 0x47, 0x43,
 	0x18, 0x03, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x05, 0x4e, 0x75, 0x6d, 0x47, 0x43, 0x12, 0x1c, 0x0a,
 	0x09, 0x43, 0x61, 0x63, 0x68, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0d,
-	0x52, 0x09, 0x43, 0x61, 0x63, 0x68, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x32, 0xb9, 0x01, 0x0a, 0x0b,
-	0x54, 0x77, 0x69, 0x74, 0x63, 0x68, 0x43, 0x61, 0x63, 0x68, 0x65, 0x12, 0x27, 0x0a, 0x08, 0x47,
-	0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x0f, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x4d, 0x75,
-	0x6c, 0x74, 0x69, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a, 0x0a, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x55,
-	0x73, 0x65, 0x72, 0x73, 0x12, 0x27, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x47, 0x61, 0x6d, 0x65, 0x73,
-	0x12, 0x0f, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x51, 0x75, 0x65, 0x72,
-	0x79, 0x1a, 0x0a, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x12, 0x2b, 0x0a,
-	0x0a, 0x47, 0x65, 0x74, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x12, 0x0f, 0x2e, 0x72, 0x70,
-	0x63, 0x2e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a, 0x0c, 0x2e, 0x72,
-	0x70, 0x63, 0x2e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x12, 0x2b, 0x0a, 0x09, 0x47, 0x65,
-	0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x11, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x53, 0x74,
-	0x61, 0x74, 0x75, 0x73, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x0b, 0x2e, 0x72, 0x70, 0x63,
-	0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x42, 0x29, 0x5a, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75,
-	0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x6e, 0x73, 0x67, 0x65, 0x2f, 0x67, 0x6f, 0x2d, 0x63,
-	0x61, 0x63, 0x68, 0x65, 0x2d, 0x63, 0x61, 0x63, 0x68, 0x65, 0x2f, 0x72, 0x70, 0x63, 0x3b, 0x72,
-	0x70, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x52, 0x09, 0x43, 0x61, 0x63, 0x68, 0x65, 0x53, 0x69, 0x7a, 0x65, 0x32, 0xfb, 0x01, 0x0a, 0x0b,
+	0x54, 0x77, 0x69, 0x74, 0x63, 0x68, 0x43, 0x61, 0x63, 0x68, 0x65, 0x12, 0x40, 0x0a, 0x10, 0x47,
+	0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x73, 0x41, 0x6e, 0x64, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x12,
+	0x18, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x73, 0x41, 0x6e, 0x64, 0x47, 0x61,
+	0x6d, 0x65, 0x73, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x12, 0x2e, 0x72, 0x70, 0x63, 0x2e,
+	0x55, 0x73, 0x65, 0x72, 0x73, 0x41, 0x6e, 0x64, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x12, 0x27, 0x0a,
+	0x08, 0x47, 0x65, 0x74, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x0f, 0x2e, 0x72, 0x70, 0x63, 0x2e,
+	0x4d, 0x75, 0x6c, 0x74, 0x69, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a, 0x0a, 0x2e, 0x72, 0x70, 0x63,
+	0x2e, 0x55, 0x73, 0x65, 0x72, 0x73, 0x12, 0x27, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x47, 0x61, 0x6d,
+	0x65, 0x73, 0x12, 0x0f, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x51, 0x75,
+	0x65, 0x72, 0x79, 0x1a, 0x0a, 0x2e, 0x72, 0x70, 0x63, 0x2e, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x12,
+	0x2b, 0x0a, 0x0a, 0x47, 0x65, 0x74, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x12, 0x0f, 0x2e,
+	0x72, 0x70, 0x63, 0x2e, 0x4d, 0x75, 0x6c, 0x74, 0x69, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a, 0x0c,
+	0x2e, 0x72, 0x70, 0x63, 0x2e, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x73, 0x12, 0x2b, 0x0a, 0x09,
+	0x47, 0x65, 0x74, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x11, 0x2e, 0x72, 0x70, 0x63, 0x2e,
+	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x73, 0x1a, 0x0b, 0x2e, 0x72,
+	0x70, 0x63, 0x2e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x42, 0x29, 0x5a, 0x27, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x64, 0x6e, 0x73, 0x67, 0x65, 0x2f, 0x67, 0x6f,
+	0x2d, 0x63, 0x61, 0x63, 0x68, 0x65, 0x2d, 0x63, 0x61, 0x63, 0x68, 0x65, 0x2f, 0x72, 0x70, 0x63,
+	0x3b, 0x72, 0x70, 0x63, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -625,35 +749,41 @@ func file_helix_api_proto_rawDescGZIP() []byte {
 	return file_helix_api_proto_rawDescData
 }
 
-var file_helix_api_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_helix_api_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_helix_api_proto_goTypes = []interface{}{
-	(*User)(nil),         // 0: rpc.User
-	(*Game)(nil),         // 1: rpc.Game
-	(*Stream)(nil),       // 2: rpc.Stream
-	(*MultiQuery)(nil),   // 3: rpc.MultiQuery
-	(*Users)(nil),        // 4: rpc.Users
-	(*Games)(nil),        // 5: rpc.Games
-	(*Streams)(nil),      // 6: rpc.Streams
-	(*StatusParams)(nil), // 7: rpc.StatusParams
-	(*Status)(nil),       // 8: rpc.Status
+	(*UsersAndGamesParams)(nil), // 0: rpc.UsersAndGamesParams
+	(*UsersAndGames)(nil),       // 1: rpc.UsersAndGames
+	(*User)(nil),                // 2: rpc.User
+	(*Game)(nil),                // 3: rpc.Game
+	(*Stream)(nil),              // 4: rpc.Stream
+	(*MultiQuery)(nil),          // 5: rpc.MultiQuery
+	(*Users)(nil),               // 6: rpc.Users
+	(*Games)(nil),               // 7: rpc.Games
+	(*Streams)(nil),             // 8: rpc.Streams
+	(*StatusParams)(nil),        // 9: rpc.StatusParams
+	(*Status)(nil),              // 10: rpc.Status
 }
 var file_helix_api_proto_depIdxs = []int32{
-	0, // 0: rpc.Users.Users:type_name -> rpc.User
-	1, // 1: rpc.Games.Games:type_name -> rpc.Game
-	2, // 2: rpc.Streams.Streams:type_name -> rpc.Stream
-	3, // 3: rpc.TwitchCache.GetUsers:input_type -> rpc.MultiQuery
-	3, // 4: rpc.TwitchCache.GetGames:input_type -> rpc.MultiQuery
-	3, // 5: rpc.TwitchCache.GetStreams:input_type -> rpc.MultiQuery
-	7, // 6: rpc.TwitchCache.GetStatus:input_type -> rpc.StatusParams
-	4, // 7: rpc.TwitchCache.GetUsers:output_type -> rpc.Users
-	5, // 8: rpc.TwitchCache.GetGames:output_type -> rpc.Games
-	6, // 9: rpc.TwitchCache.GetStreams:output_type -> rpc.Streams
-	8, // 10: rpc.TwitchCache.GetStatus:output_type -> rpc.Status
-	7, // [7:11] is the sub-list for method output_type
-	3, // [3:7] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	6,  // 0: rpc.UsersAndGames.Users:type_name -> rpc.Users
+	7,  // 1: rpc.UsersAndGames.Games:type_name -> rpc.Games
+	2,  // 2: rpc.Users.Users:type_name -> rpc.User
+	3,  // 3: rpc.Games.Games:type_name -> rpc.Game
+	4,  // 4: rpc.Streams.Streams:type_name -> rpc.Stream
+	0,  // 5: rpc.TwitchCache.GetUsersAndGames:input_type -> rpc.UsersAndGamesParams
+	5,  // 6: rpc.TwitchCache.GetUsers:input_type -> rpc.MultiQuery
+	5,  // 7: rpc.TwitchCache.GetGames:input_type -> rpc.MultiQuery
+	5,  // 8: rpc.TwitchCache.GetStreams:input_type -> rpc.MultiQuery
+	9,  // 9: rpc.TwitchCache.GetStatus:input_type -> rpc.StatusParams
+	1,  // 10: rpc.TwitchCache.GetUsersAndGames:output_type -> rpc.UsersAndGames
+	6,  // 11: rpc.TwitchCache.GetUsers:output_type -> rpc.Users
+	7,  // 12: rpc.TwitchCache.GetGames:output_type -> rpc.Games
+	8,  // 13: rpc.TwitchCache.GetStreams:output_type -> rpc.Streams
+	10, // 14: rpc.TwitchCache.GetStatus:output_type -> rpc.Status
+	10, // [10:15] is the sub-list for method output_type
+	5,  // [5:10] is the sub-list for method input_type
+	5,  // [5:5] is the sub-list for extension type_name
+	5,  // [5:5] is the sub-list for extension extendee
+	0,  // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_helix_api_proto_init() }
@@ -663,7 +793,7 @@ func file_helix_api_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_helix_api_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*User); i {
+			switch v := v.(*UsersAndGamesParams); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -675,7 +805,7 @@ func file_helix_api_proto_init() {
 			}
 		}
 		file_helix_api_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Game); i {
+			switch v := v.(*UsersAndGames); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -687,7 +817,7 @@ func file_helix_api_proto_init() {
 			}
 		}
 		file_helix_api_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Stream); i {
+			switch v := v.(*User); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -699,7 +829,7 @@ func file_helix_api_proto_init() {
 			}
 		}
 		file_helix_api_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MultiQuery); i {
+			switch v := v.(*Game); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -711,7 +841,7 @@ func file_helix_api_proto_init() {
 			}
 		}
 		file_helix_api_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Users); i {
+			switch v := v.(*Stream); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -723,7 +853,7 @@ func file_helix_api_proto_init() {
 			}
 		}
 		file_helix_api_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Games); i {
+			switch v := v.(*MultiQuery); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -735,7 +865,7 @@ func file_helix_api_proto_init() {
 			}
 		}
 		file_helix_api_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Streams); i {
+			switch v := v.(*Users); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -747,7 +877,7 @@ func file_helix_api_proto_init() {
 			}
 		}
 		file_helix_api_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StatusParams); i {
+			switch v := v.(*Games); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -759,6 +889,30 @@ func file_helix_api_proto_init() {
 			}
 		}
 		file_helix_api_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Streams); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_helix_api_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StatusParams); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_helix_api_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Status); i {
 			case 0:
 				return &v.state
@@ -777,7 +931,7 @@ func file_helix_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_helix_api_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -803,6 +957,7 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type TwitchCacheClient interface {
+	GetUsersAndGames(ctx context.Context, in *UsersAndGamesParams, opts ...grpc.CallOption) (*UsersAndGames, error)
 	GetUsers(ctx context.Context, in *MultiQuery, opts ...grpc.CallOption) (*Users, error)
 	GetGames(ctx context.Context, in *MultiQuery, opts ...grpc.CallOption) (*Games, error)
 	GetStreams(ctx context.Context, in *MultiQuery, opts ...grpc.CallOption) (*Streams, error)
@@ -815,6 +970,15 @@ type twitchCacheClient struct {
 
 func NewTwitchCacheClient(cc grpc.ClientConnInterface) TwitchCacheClient {
 	return &twitchCacheClient{cc}
+}
+
+func (c *twitchCacheClient) GetUsersAndGames(ctx context.Context, in *UsersAndGamesParams, opts ...grpc.CallOption) (*UsersAndGames, error) {
+	out := new(UsersAndGames)
+	err := c.cc.Invoke(ctx, "/rpc.TwitchCache/GetUsersAndGames", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *twitchCacheClient) GetUsers(ctx context.Context, in *MultiQuery, opts ...grpc.CallOption) (*Users, error) {
@@ -855,6 +1019,7 @@ func (c *twitchCacheClient) GetStatus(ctx context.Context, in *StatusParams, opt
 
 // TwitchCacheServer is the server API for TwitchCache service.
 type TwitchCacheServer interface {
+	GetUsersAndGames(context.Context, *UsersAndGamesParams) (*UsersAndGames, error)
 	GetUsers(context.Context, *MultiQuery) (*Users, error)
 	GetGames(context.Context, *MultiQuery) (*Games, error)
 	GetStreams(context.Context, *MultiQuery) (*Streams, error)
@@ -865,6 +1030,9 @@ type TwitchCacheServer interface {
 type UnimplementedTwitchCacheServer struct {
 }
 
+func (*UnimplementedTwitchCacheServer) GetUsersAndGames(context.Context, *UsersAndGamesParams) (*UsersAndGames, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUsersAndGames not implemented")
+}
 func (*UnimplementedTwitchCacheServer) GetUsers(context.Context, *MultiQuery) (*Users, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUsers not implemented")
 }
@@ -880,6 +1048,24 @@ func (*UnimplementedTwitchCacheServer) GetStatus(context.Context, *StatusParams)
 
 func RegisterTwitchCacheServer(s *grpc.Server, srv TwitchCacheServer) {
 	s.RegisterService(&_TwitchCache_serviceDesc, srv)
+}
+
+func _TwitchCache_GetUsersAndGames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UsersAndGamesParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TwitchCacheServer).GetUsersAndGames(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/rpc.TwitchCache/GetUsersAndGames",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TwitchCacheServer).GetUsersAndGames(ctx, req.(*UsersAndGamesParams))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _TwitchCache_GetUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -958,6 +1144,10 @@ var _TwitchCache_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "rpc.TwitchCache",
 	HandlerType: (*TwitchCacheServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetUsersAndGames",
+			Handler:    _TwitchCache_GetUsersAndGames_Handler,
+		},
 		{
 			MethodName: "GetUsers",
 			Handler:    _TwitchCache_GetUsers_Handler,

@@ -4,10 +4,21 @@ package rpc;
 option go_package = "github.com/dnsge/go-cache-cache/rpc;rpc";
 
 service TwitchCache {
+  rpc GetUsersAndGames(UsersAndGamesParams) returns (UsersAndGames);
   rpc GetUsers(MultiQuery) returns (Users);
   rpc GetGames(MultiQuery) returns (Games);
   rpc GetStreams(MultiQuery) returns (Streams);
   rpc GetStatus(StatusParams) returns (Status);
+}
+
+message UsersAndGamesParams {
+  repeated string UserIDs = 1;
+  repeated string GameIDs = 2;
+}
+
+message UsersAndGames {
+  Users Users = 1;
+  Games Games = 2;
 }
 
 message User {

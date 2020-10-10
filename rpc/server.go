@@ -1,9 +1,8 @@
-package twitch
+package rpc
 
 import (
 	"context"
 	"github.com/dnsge/go-twitch-cache/cache"
-	pb "github.com/dnsge/go-twitch-cache/rpc"
 	"github.com/nicklaw5/helix"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
@@ -12,14 +11,14 @@ import (
 )
 
 type server struct {
-	pb.UnimplementedTwitchCacheServer
+	UnimplementedTwitchCacheServer
 	client *cache.HelixCacheClient
 }
 
-func mapHelixUsersToPB(users *[]helix.User) *pb.Users {
-	var all []*pb.User
+func mapHelixUsersToPB(users *[]helix.User) *Users {
+	var all []*User
 	for _, user := range *users {
-		all = append(all, &pb.User{
+		all = append(all, &User{
 			ID:              user.ID,
 			Login:           user.Login,
 			DisplayName:     user.DisplayName,
@@ -27,25 +26,25 @@ func mapHelixUsersToPB(users *[]helix.User) *pb.Users {
 			ProfileImageURL: user.ProfileImageURL,
 		})
 	}
-	return &pb.Users{Users: all}
+	return &Users{Users: all}
 }
 
-func mapHelixGamesToPB(games *[]helix.Game) *pb.Games {
-	var all []*pb.Game
+func mapHelixGamesToPB(games *[]helix.Game) *Games {
+	var all []*Game
 	for _, game := range *games {
-		all = append(all, &pb.Game{
+		all = append(all, &Game{
 			ID:        game.ID,
 			Name:      game.Name,
 			BoxArtURL: game.BoxArtURL,
 		})
 	}
-	return &pb.Games{Games: all}
+	return &Games{Games: all}
 }
 
-func mapHelixStreamsToPB(streams *[]helix.Stream) *pb.Streams {
-	var all []*pb.Stream
+func mapHelixStreamsToPB(streams *[]helix.Stream) *Streams {
+	var all []*Stream
 	for _, stream := range *streams {
-		all = append(all, &pb.Stream{
+		all = append(all, &Stream{
 			ID:       stream.ID,
 			UserID:   stream.UserID,
 			UserName: stream.UserName,
@@ -53,10 +52,33 @@ func mapHelixStreamsToPB(streams *[]helix.Stream) *pb.Streams {
 			Title:    stream.Title,
 		})
 	}
-	return &pb.Streams{Streams: all}
+	return &Streams{Streams: all}
 }
 
-func (s *server) GetUsers(_ context.Context, query *pb.MultiQuery) (*pb.Users, error) {
+func (s *server) GetUsersAndGames(_ context.Context, params *UsersAndGamesParams) (*UsersAndGames, error) {
+	usersResult, err := s.client.GetUsers(&helix.UsersParams{
+		IDs: params.UserIDs,
+	})
+
+	if err != nil {
+		return nil, status.Error(codes.Unknown, err.Error())
+	}
+
+	gamesResult, err := s.client.GetGames(&helix.GamesParams{
+		IDs: params.GameIDs,
+	})
+
+	if err != nil {
+		return nil, status.Error(codes.Unknown, err.Error())
+	}
+
+	return &UsersAndGames{
+		Users: mapHelixUsersToPB(usersResult),
+		Games: mapHelixGamesToPB(gamesResult),
+	}, nil
+}
+
+func (s *server) GetUsers(_ context.Context, query *MultiQuery) (*Users, error) {
 	result, err := s.client.GetUsers(&helix.UsersParams{
 		IDs:    query.IDs,
 		Logins: query.Names,
@@ -69,7 +91,7 @@ func (s *server) GetUsers(_ context.Context, query *pb.MultiQuery) (*pb.Users, e
 	return mapHelixUsersToPB(result), nil
 }
 
-func (s *server) GetGames(_ context.Context, query *pb.MultiQuery) (*pb.Games, error) {
+func (s *server) GetGames(_ context.Context, query *MultiQuery) (*Games, error) {
 	result, err := s.client.GetGames(&helix.GamesParams{
 		IDs:   query.IDs,
 		Names: query.Names,
@@ -81,7 +103,7 @@ func (s *server) GetGames(_ context.Context, query *pb.MultiQuery) (*pb.Games, e
 
 	return mapHelixGamesToPB(result), nil
 }
-func (s *server) GetStreams(_ context.Context, query *pb.MultiQuery) (*pb.Streams, error) {
+func (s *server) GetStreams(_ context.Context, query *MultiQuery) (*Streams, error) {
 	result, err := s.client.GetStreams(&helix.StreamsParams{
 		UserIDs:    query.IDs,
 		UserLogins: query.Names,
@@ -94,10 +116,10 @@ func (s *server) GetStreams(_ context.Context, query *pb.MultiQuery) (*pb.Stream
 	return mapHelixStreamsToPB(result), nil
 }
 
-func (s *server) GetStatus(context.Context, *pb.StatusParams) (*pb.Status, error) {
+func (s *server) GetStatus(context.Context, *StatusParams) (*Status, error) {
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
-	return &pb.Status{
+	return &Status{
 		Alloc:     m.Alloc,
 		Sys:       m.Sys,
 		NumGC:     m.NumGC,
@@ -105,9 +127,9 @@ func (s *server) GetStatus(context.Context, *pb.StatusParams) (*pb.Status, error
 	}, nil
 }
 
-func NewServer(options *cache.ClientOptions) *grpc.Server {
+func NewTwitchCacheServer(options *cache.ClientOptions) *grpc.Server {
 	s := grpc.NewServer()
-	pb.RegisterTwitchCacheServer(s, &server{
+	RegisterTwitchCacheServer(s, &server{
 		client: cache.NewHelixCacheClient(options),
 	})
 	return s
