@@ -116,7 +116,7 @@ func (c *HelixCacheClient) cacheUsers(users []helix.User) {
 	}
 }
 
-func (c *HelixCacheClient) getUsers(ids, names []string) (*[]helix.User, error) {
+func (c *HelixCacheClient) getUsers(ids, names []string) ([]helix.User, error) {
 	if len(ids)+len(names) > 100 {
 		return nil, fmt.Errorf("100 maximum exceeded")
 	}
@@ -152,12 +152,12 @@ func (c *HelixCacheClient) getUsers(ids, names []string) (*[]helix.User, error) 
 		return nil, fmt.Errorf("failed to fetch users")
 	}
 
-	return &helixRes.Data.Users, nil
+	return helixRes.Data.Users, nil
 }
 
-func (c *HelixCacheClient) GetUsers(users *helix.UsersParams) (*[]helix.User, error) {
+func (c *HelixCacheClient) GetUsers(users *helix.UsersParams) (*UsersResult, error) {
 	if len(users.IDs)+len(users.Logins) == 0 {
-		return &[]helix.User{}, nil
+		return &UsersResult{[]helix.User{}}, nil
 	}
 
 	allIDs := removeDuplicates(users.IDs)
@@ -196,7 +196,7 @@ func (c *HelixCacheClient) GetUsers(users *helix.UsersParams) (*[]helix.User, er
 			if err != nil {
 				return nil, err
 			}
-			needCache = append(needCache, *res...)
+			needCache = append(needCache, res...)
 			requiredIDs = requiredIDs[a:]
 			requiredNames = requiredNames[b:]
 		}
@@ -204,7 +204,7 @@ func (c *HelixCacheClient) GetUsers(users *helix.UsersParams) (*[]helix.User, er
 		go c.cacheUsers(needCache)
 	}
 
-	return &userResults, nil
+	return &UsersResult{userResults}, nil
 }
 
 func (c *HelixCacheClient) cacheGames(games []helix.Game) {
@@ -214,7 +214,7 @@ func (c *HelixCacheClient) cacheGames(games []helix.Game) {
 	}
 }
 
-func (c *HelixCacheClient) getGames(ids, names []string) (*[]helix.Game, error) {
+func (c *HelixCacheClient) getGames(ids, names []string) ([]helix.Game, error) {
 	if len(ids)+len(names) > 100 {
 		return nil, fmt.Errorf("100 maximum exceeded")
 	}
@@ -250,12 +250,12 @@ func (c *HelixCacheClient) getGames(ids, names []string) (*[]helix.Game, error) 
 		return nil, fmt.Errorf("failed to fetch games")
 	}
 
-	return &helixRes.Data.Games, nil
+	return helixRes.Data.Games, nil
 }
 
-func (c *HelixCacheClient) GetGames(games *helix.GamesParams) (*[]helix.Game, error) {
+func (c *HelixCacheClient) GetGames(games *helix.GamesParams) (*GamesResult, error) {
 	if len(games.IDs)+len(games.Names) == 0 {
-		return &[]helix.Game{}, nil
+		return &GamesResult{[]helix.Game{}}, nil
 	}
 
 	allIDs := removeDuplicates(games.IDs)
@@ -293,7 +293,7 @@ func (c *HelixCacheClient) GetGames(games *helix.GamesParams) (*[]helix.Game, er
 			if err != nil {
 				return nil, err
 			}
-			needCache = append(needCache, *res...)
+			needCache = append(needCache, res...)
 			requiredIDs = requiredIDs[a:]
 			requiredNames = requiredNames[b:]
 		}
@@ -301,10 +301,25 @@ func (c *HelixCacheClient) GetGames(games *helix.GamesParams) (*[]helix.Game, er
 		go c.cacheGames(needCache)
 	}
 
-	return &gameResults, nil
+	return &GamesResult{gameResults}, nil
 }
 
-func (c *HelixCacheClient) getStreams(ids, names []string) (*[]helix.Stream, error) {
+// Utility function
+func (c *HelixCacheClient) GetUsersAndGames(users *helix.UsersParams, games *helix.GamesParams) (*UsersResult, *GamesResult, error) {
+	usersRes, err := c.GetUsers(users)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	gamesRes, err := c.GetGames(games)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return usersRes, gamesRes, nil
+}
+
+func (c *HelixCacheClient) getStreams(ids, names []string) ([]helix.Stream, error) {
 	if len(ids)+len(names) > 100 {
 		return nil, fmt.Errorf("100 maximum exceeded")
 	}
@@ -340,12 +355,12 @@ func (c *HelixCacheClient) getStreams(ids, names []string) (*[]helix.Stream, err
 		return nil, fmt.Errorf("failed to fetch streams")
 	}
 
-	return &helixRes.Data.Streams, nil
+	return helixRes.Data.Streams, nil
 }
 
-func (c *HelixCacheClient) GetStreams(streams *helix.StreamsParams) (*[]helix.Stream, error) {
+func (c *HelixCacheClient) GetStreams(streams *helix.StreamsParams) ([]helix.Stream, error) {
 	if len(streams.UserIDs)+len(streams.UserLogins) == 0 {
-		return &[]helix.Stream{}, nil
+		return []helix.Stream{}, nil
 	}
 
 	requiredIDs := removeDuplicates(streams.UserIDs)
@@ -364,11 +379,11 @@ func (c *HelixCacheClient) GetStreams(streams *helix.StreamsParams) (*[]helix.St
 			if err != nil {
 				return nil, err
 			}
-			streamResults = append(streamResults, *res...)
+			streamResults = append(streamResults, res...)
 			requiredIDs = requiredIDs[a:]
 			requiredNames = requiredNames[b:]
 		}
 	}
 
-	return &streamResults, nil
+	return streamResults, nil
 }

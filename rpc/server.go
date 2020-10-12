@@ -15,9 +15,9 @@ type server struct {
 	client *cache.HelixCacheClient
 }
 
-func mapHelixUsersToPB(users *[]helix.User) *Users {
+func mapHelixUsersToPB(users []helix.User) *Users {
 	var all []*User
-	for _, user := range *users {
+	for _, user := range users {
 		all = append(all, &User{
 			ID:              user.ID,
 			Login:           user.Login,
@@ -29,9 +29,9 @@ func mapHelixUsersToPB(users *[]helix.User) *Users {
 	return &Users{Users: all}
 }
 
-func mapHelixGamesToPB(games *[]helix.Game) *Games {
+func mapHelixGamesToPB(games []helix.Game) *Games {
 	var all []*Game
-	for _, game := range *games {
+	for _, game := range games {
 		all = append(all, &Game{
 			ID:        game.ID,
 			Name:      game.Name,
@@ -41,9 +41,9 @@ func mapHelixGamesToPB(games *[]helix.Game) *Games {
 	return &Games{Games: all}
 }
 
-func mapHelixStreamsToPB(streams *[]helix.Stream) *Streams {
+func mapHelixStreamsToPB(streams []helix.Stream) *Streams {
 	var all []*Stream
-	for _, stream := range *streams {
+	for _, stream := range streams {
 		all = append(all, &Stream{
 			ID:       stream.ID,
 			UserID:   stream.UserID,
@@ -73,8 +73,8 @@ func (s *server) GetUsersAndGames(_ context.Context, params *UsersAndGamesParams
 	}
 
 	return &UsersAndGames{
-		Users: mapHelixUsersToPB(usersResult),
-		Games: mapHelixGamesToPB(gamesResult),
+		Users: mapHelixUsersToPB(usersResult.Users),
+		Games: mapHelixGamesToPB(gamesResult.Games),
 	}, nil
 }
 
@@ -88,7 +88,7 @@ func (s *server) GetUsers(_ context.Context, query *MultiQuery) (*Users, error) 
 		return nil, status.Error(codes.Unknown, err.Error())
 	}
 
-	return mapHelixUsersToPB(result), nil
+	return mapHelixUsersToPB(result.Users), nil
 }
 
 func (s *server) GetGames(_ context.Context, query *MultiQuery) (*Games, error) {
@@ -101,7 +101,7 @@ func (s *server) GetGames(_ context.Context, query *MultiQuery) (*Games, error) 
 		return nil, status.Error(codes.Unknown, err.Error())
 	}
 
-	return mapHelixGamesToPB(result), nil
+	return mapHelixGamesToPB(result.Games), nil
 }
 func (s *server) GetStreams(_ context.Context, query *MultiQuery) (*Streams, error) {
 	result, err := s.client.GetStreams(&helix.StreamsParams{
