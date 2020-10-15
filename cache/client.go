@@ -59,6 +59,28 @@ func (c *HelixCacheClient) CacheSize() uint32 {
 	return uint32(c.cache.ItemCount())
 }
 
+func (c *HelixCacheClient) GetAppTokenClient() (*helix.Client, error) {
+	var token string
+	if c.tokenIsValid() {
+		token = c.appToken
+	} else {
+		c.tokenMutex.Lock()
+		err := c.generateAppToken()
+		c.tokenMutex.Unlock()
+		if err != nil {
+			return nil, err
+		}
+		token = c.appToken
+	}
+
+	return helix.NewClient(&helix.Options{
+		ClientID:       c.options.ClientID,
+		ClientSecret:   c.options.ClientSecret,
+		AppAccessToken: token,
+		RedirectURI:    "",
+	})
+}
+
 func (c *HelixCacheClient) tokenIsValid() bool {
 	c.tokenMutex.RLock()
 	defer c.tokenMutex.RUnlock()
