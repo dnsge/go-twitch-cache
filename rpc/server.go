@@ -55,6 +55,20 @@ func mapHelixStreamsToPB(streams []helix.Stream) *Streams {
 	return &Streams{Streams: all}
 }
 
+func mapHelixChannelsToPB(channels []helix.Channel) *Channels {
+	var all []*Channel
+	for _, channel := range channels {
+		all = append(all,&Channel{
+			ID:            channel.ID,
+			DisplayName:   channel.DisplayName,
+			Title:         channel.Title,
+			ThumbnailURL:  channel.ThumbnailURL,
+			IsLive:        channel.IsLive,
+		})
+	}
+	return &Channels{Channels: all}
+}
+
 func (s *server) GetUsersAndGames(_ context.Context, params *UsersAndGamesParams) (*UsersAndGames, error) {
 	usersResult, err := s.client.GetUsers(&helix.UsersParams{
 		IDs: params.UserIDs,
@@ -125,6 +139,20 @@ func (s *server) GetStatus(context.Context, *StatusParams) (*Status, error) {
 		NumGC:     m.NumGC,
 		CacheSize: s.client.CacheSize(),
 	}, nil
+}
+
+func (s *server) SearchChannels(_ context.Context, query *ChannelSearchQuery) (*Channels, error) {
+	result, err := s.client.SearchChannels(&helix.SearchChannelsParams{
+		Channel:  query.Name,
+		First:    20,
+		LiveOnly: query.LiveOnly,
+	})
+
+	if err != nil {
+		return nil, status.Error(codes.Unknown, err.Error())
+	}
+
+	return mapHelixChannelsToPB(result), nil
 }
 
 func NewTwitchCacheServer(options *cache.ClientOptions) *grpc.Server {

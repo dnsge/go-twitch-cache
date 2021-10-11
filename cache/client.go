@@ -409,3 +409,22 @@ func (c *HelixCacheClient) GetStreams(streams *helix.StreamsParams) ([]helix.Str
 
 	return streamResults, nil
 }
+
+func (c *HelixCacheClient) SearchChannels(search *helix.SearchChannelsParams) ([]helix.Channel, error) {
+	client, err := c.getAppTwitchClient()
+	if err != nil {
+		return nil, err
+	}
+
+	helixRes, err := client.SearchChannels(search)
+	if err != nil {
+		return nil, err
+	}
+
+	if helixRes.StatusCode != http.StatusOK {
+		log.Printf("Failed to search channels: %d %s", helixRes.StatusCode, helixRes.ErrorMessage)
+		return nil, fmt.Errorf("failed to search channels")
+	}
+
+	return helixRes.Data.Channels, nil
+}

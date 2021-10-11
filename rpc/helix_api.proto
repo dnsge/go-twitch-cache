@@ -8,6 +8,7 @@ service TwitchCache {
   rpc GetUsers(MultiQuery) returns (Users);
   rpc GetGames(MultiQuery) returns (Games);
   rpc GetStreams(MultiQuery) returns (Streams);
+  rpc SearchChannels(ChannelSearchQuery) returns (Channels);
   rpc GetStatus(StatusParams) returns (Status);
 }
 
@@ -43,9 +44,22 @@ message Stream {
   string Title = 5;
 }
 
+message Channel {
+  string ID = 1;
+  string DisplayName = 2;
+  string Title = 3;
+  string ThumbnailURL = 4;
+  bool IsLive = 5;
+}
+
 message MultiQuery {
   repeated string IDs = 1;
   repeated string Names = 2;
+}
+
+message ChannelSearchQuery {
+  string Name = 1;
+  bool LiveOnly = 2;
 }
 
 message Users {
@@ -58,6 +72,10 @@ message Games {
 
 message Streams {
   repeated Stream Streams = 1;
+}
+
+message Channels {
+  repeated Channel Channels = 1;
 }
 
 message StatusParams{}
