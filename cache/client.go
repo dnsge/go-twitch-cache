@@ -421,6 +421,17 @@ func (c *HelixCacheClient) SearchChannels(search *helix.SearchChannelsParams) ([
 		return nil, err
 	}
 
+	if helixRes.StatusCode == http.StatusUnauthorized {
+		err := c.requestNewAppToken()
+		if err != nil {
+			return nil, err
+		}
+		helixRes, err = client.SearchChannels(search)
+		if err != nil {
+			return nil, err
+		}
+	}
+
 	if helixRes.StatusCode != http.StatusOK {
 		log.Printf("Failed to search channels: %d %s", helixRes.StatusCode, helixRes.ErrorMessage)
 		return nil, fmt.Errorf("failed to search channels")
