@@ -17,6 +17,14 @@ const (
 	gameNameKeyPrefix = "game:name:"
 )
 
+type Client interface {
+	GetUsers(users *helix.UsersParams) (*UsersResult, error)
+	GetGames(games *helix.GamesParams) (*GamesResult, error)
+	GetUsersAndGames(users *helix.UsersParams, games *helix.GamesParams) (*UsersResult, *GamesResult, error)
+	GetStreams(streams *helix.StreamsParams) ([]helix.Stream, error)
+	SearchChannels(search *helix.SearchChannelsParams) ([]helix.Channel, error)
+}
+
 type ClientOptions struct {
 	ClientID        string
 	ClientSecret    string
